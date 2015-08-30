@@ -1,10 +1,10 @@
 import R from 'ramda';
 
-import HtmlProcessor from './../lib/processors/HtmlProcessor';
+import {HtmlProcessor, CssProcessor} from './../lib/processors';
 import logger from './../lib/utils/logger';
 import {cssCombinator, jsCombinator} from './../lib/rules';
 
-let doc = `
+let htmlDoc = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +54,17 @@ let doc = `
 </html>
 `;
 
-let htmlProcessor = new HtmlProcessor(doc);
+let cssDoc = `
+#email {
+  font-size: 110%;
+}
+
+input[name*="remember"] {
+  font-weight: bold;
+}
+`
+
+let htmlProcessor = new HtmlProcessor(htmlDoc);
 
 htmlProcessor
   .use(cssCombinator('css/generated.css'))
@@ -65,3 +75,8 @@ htmlProcessor
 
 logger.info(htmlProcessor.toString());
 
+let cssProcessor = new CssProcessor(cssDoc);
+
+cssProcessor.ast().serialize()
+
+logger.info(cssProcessor._ast, cssProcessor.toString())
