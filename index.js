@@ -1,6 +1,6 @@
-
-const html = require('./lib/html.js')
-
+import HtmlProcessor from './lib/HtmlProcessor';
+import logger from './lib/utils/logger';
+import R from 'ramda';
 
 let doc = `
 <!DOCTYPE html>
@@ -38,10 +38,40 @@ let doc = `
   <script src="/js/app.js"></script>
 </body>
 </html>
-`
-console.log(html)
-let p = new html(doc)
+`;
 
-// console.log(p.ast().document)
-// console.log(p.ast().serialize().html)
-console.log(p.ast().changeCSS().serialize().output())
+let htmlProcessor = new HtmlProcessor(doc);
+
+htmlProcessor
+  .use({
+    name: 'combineCSS',
+    filters: [
+        x => x.nodeName === 'link',
+        x => R.contains({ name: 'rel', value: 'stylesheet' }, x.attrs),
+    ],
+    results: [],
+    transform: items => {
+      R.map(item => {
+        item.node.parentNode.childNodes[item.index] = {
+          nodeName: '#text',
+          value: '',
+          parentNode: item.node.parentNode,
+        };
+      }, items);
+
+      items[0].node.parentNode.childNodes.push({
+        nodeName: 'link',
+        tagName: 'link',
+        attrs: [{ name: 'rel', value: 'stylesheet' },
+          { name: 'href', value: '/css/generated.css' }],
+        namespaceURI: 'http://www.w3.org/1999/xhtml',
+        childNodes: [],
+        parentNode: items[0].node.parentNode,
+      });
+    },
+  })
+  .ast()
+  .transform()
+  .serialize();
+
+logger.info(htmlProcessor.toString())
