@@ -2,7 +2,7 @@ import R from 'ramda';
 
 import HtmlProcessor from './../lib/processors/HtmlProcessor';
 import logger from './../lib/utils/logger';
-import {cssCombinator} from './../lib/rules';
+import {cssCombinator, jsCombinator} from './../lib/rules';
 
 let doc = `
 <!DOCTYPE html>
@@ -36,8 +36,20 @@ let doc = `
     </div>
     <button type="submit" class="btn btn-default" id="login">Submit</button>
   </form>
-  <script src="/js/bootstrap.min.js"></script>
-  <script src="/js/app.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#login').on('click', function(e) {
+        var email = document.getElementById('email');
+        var gid = document.getElementById;
+        console.log('Email is ' + email.value);
+        console.log($('#password').val());
+        console.log($('input[name="rememberMe"]').val());
+        console.log(gid('exampleInputFile'));
+      });
+    });
+  </script>
 </body>
 </html>
 `;
@@ -46,11 +58,10 @@ let htmlProcessor = new HtmlProcessor(doc);
 
 htmlProcessor
   .use(cssCombinator('css/generated.css'))
+  .use(jsCombinator('js/generated.js'))
   .ast()
   .transform()
   .serialize();
 
-logger.info(htmlProcessor.toString())
+logger.info(htmlProcessor.toString());
 
-process.stdin.resume();
-process.stdin.once('data', (data) => console.log(data));
