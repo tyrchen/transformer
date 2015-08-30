@@ -1,18 +1,17 @@
-import HtmlProcessor from './lib/processors/HtmlProcessor';
-import logger from './lib/utils/logger';
 import R from 'ramda';
-import {cssCombinator} from './lib/rules';
 
-logger.debug(cssCombinator);
+import HtmlProcessor from './../lib/processors/HtmlProcessor';
+import logger from './../lib/utils/logger';
+import {cssCombinator} from './../lib/rules';
 
 let doc = `
 <!DOCTYPE html>
 <html>
 <head>
   <title>Test</title>
-  <link rel="stylesheet" href="/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
 <h1> Hello world!</h1>
@@ -46,7 +45,7 @@ let doc = `
 let htmlProcessor = new HtmlProcessor(doc);
 
 htmlProcessor
-  .use(cssCombinator('logs/generated.css'))
+  .use(cssCombinator('css/generated.css'))
   .ast()
   .transform()
   .serialize();

@@ -1,0 +1,7 @@
+#email {
+  font-size: 110%;
+}
+
+input[name*="remember"] {
+  font-weight: bold;
+}
