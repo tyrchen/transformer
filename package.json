@@ -1,0 +1,27 @@
+{
+  "name": "transformer",
+  "version": "0.1.0",
+  "description": "transform mime resources with rules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tyrchen/transformer.git"
+  },
+  "keywords": [
+    "parser",
+    "dom"
+  ],
+  "author": "Tyr Chen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tyrchen/transformer/issues"
+  },
+  "homepage": "https://github.com/tyrchen/transformer#readme",
+  "dependencies": {
+    "parse5": "^1.5.0",
+    "ramda": "^0.17.1"
+  }
+}
