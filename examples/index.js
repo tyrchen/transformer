@@ -18,6 +18,7 @@ fs.readFile('./index.html', 'utf8', (err, data) => {
     .serialize();
 
   logger.info(`Transformed index.html: ${htmlProcessor.toString().length}`);
+  logger.info(htmlProcessor.toString());
 });
 
 fs.readFile('./css/app.css', 'utf8', (err, data) => {
