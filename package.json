@@ -1,5 +1,5 @@
 {
-  "name": "transformer",
+  "name": "content-transformer",
   "version": "0.2.0",
   "description": "transform mime resources with rules",
   "main": "index.js",
@@ -47,7 +47,6 @@
   },
   "homepage": "https://github.com/tyrchen/transformer#readme",
   "dependencies": {
-    "async": "^1.4.2",
     "css": "^2.2.1",
     "escodegen": "^1.6.1",
     "esprima": "^2.6.0",
