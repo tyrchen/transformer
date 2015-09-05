@@ -1,9 +1,7 @@
 import fs from 'fs';
 import R from 'ramda';
 
-import {HtmlProcessor, CssProcessor, JsProcessor} from './../lib/processors';
-import logger from './../lib/utils/logger';
-import {combineCssRule, combineJsRule} from './../lib/rules';
+import {HtmlProcessor, CssProcessor, JsProcessor, logger, combineCssRule, combineJsRule} from './../lib';
 
 fs.readFile('./index.html', 'utf8', (err, data) => {
   err && logger.error(err);
